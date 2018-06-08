@@ -2,7 +2,7 @@
 //die Bibliothek, die man verwendet
 #include <string.h>
 //Ergebnis, die man mitbekommen muss
-int     crc_ok = 0x470F;
+int crc_ok =0x470F;
 
 //wir schreiben daten, die dividiert mit ein Polynom werden.
 unsigned short crc16(unsigned char * data_p, unsigned short length) {
@@ -42,26 +42,33 @@ unsigned short crc16(unsigned char * data_p, unsigned short length) {
 // main() - test driver for crc16 function
 //
 **************************************************************************/
-
 #include <stdio.h>
-
 
 main(int argc, char *argv)
 
 {
-       //deklaration der Text, den wir verschluesseln moechten
-       unsigned char a[100];
 
+       //deklaration der Text, den wir verschluesseln moechten
+
+        unsigned char a[100];
        unsigned short crc;
+
        //Durch die Tastatur der Text eingeben
        scanf("%s",&a);
        //wird der Text mitgebracht, und die Polynomdivision gemacht.
        printf("The crc of \"%s\" is 0x%X.\r\n\n",
                     a, crc16 (a, (short)strlen((char *)a)));
 
+        printf ("The crc of \"%s\" is %X. The value of crc_ok is 0x%X.\r\n\n",
+                    crc16(a, (short)strlen((char *)crc_ok)));
+
+        printf("The crc of \n",strcpy(a, "THE,QUICK,BROWN,FOX,0123456789"));
+       printf("The crc of \"%s\" is 0x%X.\r\n\n",
+                     crc16 (a, strlen((char *) a)),"The crc of \"%s\" is 0x%X.\r\n\n",
+         crc16 (a, strlen(a)));
+
 
        puts("strike RETURN to continue...");
        //bekommen von die Daten(=TEXT)
        getchar();
 }
-
