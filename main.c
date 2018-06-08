@@ -10,14 +10,15 @@ unsigned short crc16(unsigned char * data_p, unsigned short length) {
        //daten von Sensor z.B.
        unsigned int data;
        unsigned int crc;
+       int i;
 
        crc = 0xffff;
        //wenn es nicht eingetippt wird die crc zurückgegeben
        if (length == 0)
               return (~crc);
        //Es nimmt die Daten von Sensoren beispielsweise und probieren, ob die crc_ok gleich mit dem division ist.
-       do {
-              for (int i = 0 , data = (unsigned int)0xff & (unsigned char)*data_p++;
+         do {
+            for (i = 0 , data = (unsigned int)0xff & * data_p++;
                   i < 8;
                   i++, data >>= 1) {
                     if ((crc & 0x0001) ^ (data & 0x0001))
@@ -26,7 +27,6 @@ unsigned short crc16(unsigned char * data_p, unsigned short length) {
                            crc >>= 1;
               }
        } while (--length);
-
        crc = ~crc;
 
        data = crc;
